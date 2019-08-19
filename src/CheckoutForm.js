@@ -36,7 +36,7 @@ class CheckoutForm extends Component {
 
         let response = await fetch("/charge", {
             method: "POST",
-            headers: {"Content-Type": "multipart/form-data"},
+            headers: {},
             body: this.getFormData(body)
         });
 
