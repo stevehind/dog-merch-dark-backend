@@ -16,6 +16,11 @@ class CheckoutForm extends Component {
         });
     }
 
+    getFormData = object => Object.keys(object).reduce((formData, key) => {
+        formData.append(key, object[key]);
+        return formData;
+    }, new FormData());
+
     async submit(ev) {
         let {token} = await this.props.stripe.createToken({name : "Name"});
 
@@ -31,8 +36,8 @@ class CheckoutForm extends Component {
 
         let response = await fetch("/charge", {
             method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(token.id)
+            headers: {"Content-Type": "multipart/form-data"},
+            body: this.getFormData(body)
         });
 
         if (response.ok) this.setState({complete: "true"});
@@ -86,14 +91,14 @@ class CheckoutForm extends Component {
                         value={zip}
                         onChange={this.handleChange}/>
                 </form>
-                    <p>Enter card details below. Card payments are processed by Stripe, and we don't see or store your card details.</p>
-                    <div className="checkout">
-                        <CardElement />
-                        <div className="vertical-centre, padding-top">
-                            <button onSubmit={this.submit}>Purchase: $40.00 USD</button>
-                        </div>
+                <p>Enter card details below. Card payments are processed by Stripe, and we don't see or store your card details.</p>
+                <div className="checkout">
+                    <CardElement />
+                    <div className="vertical-centre, padding-top">
+                        <button onClick={this.submit}>Purchase: $40.00 USD</button>
                     </div>
-                    <p>We'll ship the calendar within two weeks of order. Shipping and tax are included in the price.</p>
+                </div>
+                <p>We'll ship the calendar within two weeks of order. Shipping and tax are included in the price.</p>
             </div>
         );
     }
