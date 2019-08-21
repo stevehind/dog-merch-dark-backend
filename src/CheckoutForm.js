@@ -37,7 +37,7 @@ class CheckoutForm extends Component {
         let response = await fetch("/charge", {
             method: "POST",
             headers: {},
-            body: this.getFormData(body)
+            body: JSON.stringify(body)
         });
 
         if (response.ok) this.setState({complete: "true"});
