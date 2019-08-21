@@ -47,11 +47,31 @@ class CheckoutForm extends Component {
     render() {
         const {name, email, address, city, state, zip} = this.state
 
-        if (this.state.complete === "true") return <h1>Purchase Complete</h1>;
-        else if (this.state.complete ==="false") return <div><h1>Payment failed</h1><p>Refresh to try again.</p></div>;
+        if (this.state.complete === "true") return (
+            <div className="small-container">
+                <div className="vertical-center">
+                <h1>Purchase Complete</h1>
+                </div>
+                <div className="small-container vertical-center">
+                <p>We'll ship your calendar in the next two weeks.</p>
+                </div>
+            </div>
+        );
+        else if (this.state.complete ==="false") return (
+            <div className="small-container">
+            <div className="vertical-center">
+                <h1>Payment failed</h1>
+            </div>
+            <div className="small-container vertical-center">
+                <p>Refresh to try again.
+                    Please fill out all of the shipping details form.
+                    Your card has not been charged.</p>
+            </div>
+            </div>
+        );
 
         return (
-            <div className="container">
+            <div className="small-container">
                 <form>
                     <p>Enter your the address you'd like your calendar to be shipped to, and an email address for any updates (we won't spam you).</p>
                     <label>Name</label>
@@ -91,14 +111,16 @@ class CheckoutForm extends Component {
                         value={zip}
                         onChange={this.handleChange}/>
                 </form>
-                <p>Enter card details below. Card payments are processed by Stripe, and we don't see or store your card details.</p>
-                <div className="checkout">
+                <p>Enter card details below.
+                    Card payments are processed by Stripe, and we don't see or store your card details.
+                    We'll ship the calendar within two weeks of order.
+                    Shipping and tax are included in the price.</p>
+                <div className="checkout small-container">
                     <CardElement />
-                    <div className="vertical-centre, padding-top">
+                    <div className="vertical-center padding-top padding-bottom">
                         <button onClick={this.submit}>Purchase: $40.00 USD</button>
                     </div>
                 </div>
-                <p>We'll ship the calendar within two weeks of order. Shipping and tax are included in the price.</p>
             </div>
         );
     }
