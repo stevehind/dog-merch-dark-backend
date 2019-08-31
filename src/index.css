@@ -434,6 +434,11 @@ dd {
 .float-right {
   float: right; }
 
+.left-right-padding {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 .no-padding-top {
   padding-top: 0; }
 

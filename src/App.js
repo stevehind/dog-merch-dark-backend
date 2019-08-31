@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Elements, StripeProvider} from 'react-stripe-elements';
 import CheckoutForm from './CheckoutForm';
-import sydney_and_sesil from './sydney-and-sesil.jpg';
 import Terms from './terms';
+import Carousel from './Carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 class App extends Component {
   render() {
@@ -16,17 +17,11 @@ class App extends Component {
             <div className="small-container vertical-center">
               <blockquote className="">"This calendar is awesome!"<br/> - my grandma.</blockquote>
             </div>
-            <div className="small-container responsive-image vertical-center padding-bottom">
-              <figure>
-                <img 
-                  src={sydney_and_sesil}
-                  alt="Sydney and Sesil!"
-                  width="400"
-                  height="400"/>
-                <figcaption className="text-center">
-                  <a href="https://www.instagram.com/sydney_and_sesil/">Check them out on Instagram!</a>
-                </figcaption>
-              </figure>
+            <div className="small-container left-right-padding">
+                <Carousel />
+            </div>
+            <div className="small-container vertical-center">
+              <p><a href="https://www.instagram.com/sydney_and_sesil/">Check them out on Instagram!</a></p>
             </div>
             <div className="small-container vertical-center">
               <p>Run, don't walk to secure your 2020 wall calendar,

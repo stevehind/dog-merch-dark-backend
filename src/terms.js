@@ -28,7 +28,7 @@ class Terms extends Component {
                 <h1>Terms and Conditions ("Terms")</h1>
                 <p>Last updated: Aug, 2019</p>
                 <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the
-                    www.stevehind.me website (the "Service") operated by stevehind.me ("us", "we", or "our").</p>
+                    stevehind-dog-merch.builtbydark.com website (the "Service") operated by stevehind.me ("us", "we", or "our").</p>
                 <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These
                     Terms apply to all visitors, users and others who access or use the Service.</p>
                 <p>By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms
