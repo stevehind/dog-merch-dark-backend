@@ -3,6 +3,7 @@ import {Elements, StripeProvider} from 'react-stripe-elements';
 import CheckoutForm from './CheckoutForm';
 import Terms from './terms';
 import Carousel from './Carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 class App extends Component {
   render() {
@@ -16,7 +17,7 @@ class App extends Component {
             <div className="small-container vertical-center">
               <blockquote className="">"This calendar is awesome!"<br/> - my grandma.</blockquote>
             </div>
-            <div className="small-container vertical-center padding-bottom">
+            <div className="small-container left-right-padding">
                 <Carousel />
             </div>
             <div className="small-container vertical-center">

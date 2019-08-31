@@ -1,21 +1,36 @@
 import React from 'react';
-import AliceCarousel from 'react-alice-carousel';
-import "react-alice-carousel/lib/alice-carousel.css";
+import { Carousel } from "react-responsive-carousel";
 import download1 from "./images/download-1.jpg";
-import download3 from "./images/download-3.jpg";
-import download4 from "./images/download-4.jpg";
-import download5 from "./images/download-5.jpg";
-import download6 from "./images/download-6.jpg";
+import download7 from "./images/download-7.jpg";
+import download8 from "./images/download-8.jpg";
+import download9 from "./images/download-9.jpg";
+import download10 from "./images/download-10.jpg";
+import download11 from "./images/download-11.jpg";
 
-const Carousel = () => (
-
-        <AliceCarousel>
-            <img src={download1} alt="text" height={200} width={200} />
-            <img src={download3} alt="text" className="responsive-image" height={200} width={200} />
-            <img src={download4} alt="text" className="responsive-image" height={200} width={200} />
-            <img src={download5} alt="text" className="responsive-image" height={200} width={200} />
-            <img src={download6} alt="text" className="responsive-image" height={200} width={200} />
-        </AliceCarousel>
-  )
-
-export default Carousel;
+export default () => (
+  <Carousel autoplay
+  showArrows={true}
+  dynamicHeight={true}
+  useKeyboardArrows={true}
+  infiniteLoop={true}
+  >
+    <div>
+      <img src={download1} alt="Sesil with his ball!"/>
+    </div>
+    <div>
+      <img src={download7} alt="Noir puppies"/>
+    </div>
+    <div>
+      <img src={download8} alt="Views of Sesil"/>
+    </div>
+    <div>
+      <img src={download9} alt="Tough boys"/>
+    </div>
+    <div>
+      <img src={download10} alt="Bad Santa"/>
+    </div>
+    <div>
+      <img src={download11} alt="Bad Sydney"/>
+    </div>
+  </Carousel>
+);
