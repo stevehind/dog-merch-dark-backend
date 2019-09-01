@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Elements, StripeProvider} from 'react-stripe-elements';
-import CheckoutForm from './CheckoutForm';
+import ShippingForm from './ShippingForm';
 import Terms from './terms';
 import Carousel from './Carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -28,9 +28,9 @@ class App extends Component {
           </div>
           <div className="full-container">
             <StripeProvider apiKey="pk_live_N0ieCjIE8lHaPeA3gdeq6ULm00NgerxJLj">
-            <Elements>
-              <CheckoutForm />
-            </Elements>
+              <Elements>
+                <ShippingForm/>
+              </Elements>
             </StripeProvider>
           </div>
         </body>
