@@ -4,10 +4,21 @@ import {CardElement, injectStripe} from 'react-stripe-elements';
 class CheckoutForm extends Component {
     constructor(props) {
       super(props);
-      this.state = {complete: "ready"}
+      this.state = {
+          complete: "ready",
+          apiKey: null
+        }
       this.submit = this.submit.bind(this);
     }
   
+    componentDidMount() {
+        api.getPublicStripeKey().then(apiKey => {
+          this.setState({
+            apiKey: apiKey
+          });
+        });
+    }
+
     handleChange = event => {
         const {name,value} = event.target;
 
@@ -116,10 +127,17 @@ class CheckoutForm extends Component {
                     We'll ship the calendar within two weeks of order.
                     Shipping and tax are included in the price.</p>
                 <div className="checkout small-container">
-                    <CardElement />
+                    {this.state.apiKey && (
+                        <StripeProvider apiKey={this.state.apiKey}>
+                            <Elements>
+                                <CheckoutForm />
+                            </Elements>
+                        </StripeProvider>
+                    )}
+{/*                     <CardElement />
                     <div className="vertical-center padding-top padding-bottom">
                         <button onClick={this.submit}>Purchase: $40.00 USD</button>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         );

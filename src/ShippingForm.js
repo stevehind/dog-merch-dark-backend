@@ -24,6 +24,7 @@ class ShippingForm extends Component {
 
       async submit(ev) {
         this.setState({payment: true});
+        
     }
 
       render() {

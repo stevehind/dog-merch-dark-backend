@@ -6,7 +6,8 @@ class PaymentForm extends Component {
     constructor(props) {
         super(props);
         this.submit = this.submit.bind(this);
-        this.state = {submitted: false}
+        this.state = {submitted: false};
+        this.state = {successful: false};
     }
 
     async submit(ev) {
@@ -14,6 +15,13 @@ class PaymentForm extends Component {
     }
 
     render() {
+
+        if (this.state.submitted === true) return (
+            <div className="small-container">
+                <h3 className="text-center">We're processing your payment.</h3>
+            </div>
+        )    
+
         return (
         <div className="checkout small-container">
             <p>Enter card details below.
