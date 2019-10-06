@@ -1,22 +1,13 @@
 import React, { Component } from 'react';
-import {CardElement, injectStripe} from 'react-stripe-elements';
 
 class CheckoutForm extends Component {
     constructor(props) {
       super(props);
       this.state = {
-          complete: "ready",
-          apiKey: null
+          shipping_submitted: false,
+          key: null
         }
       this.submit = this.submit.bind(this);
-    }
-  
-    componentDidMount() {
-        api.getPublicStripeKey().then(apiKey => {
-          this.setState({
-            apiKey: apiKey
-          });
-        });
     }
 
     handleChange = event => {
@@ -33,10 +24,7 @@ class CheckoutForm extends Component {
     }, new FormData());
 
     async submit(ev) {
-        let {token} = await this.props.stripe.createToken({name : "Name"});
-
         let body = {
-            token : token.id,
             name : this.state.name,
             email: this.state.email,
             address: this.state.address,
@@ -45,41 +33,27 @@ class CheckoutForm extends Component {
             zip: this.state.zip
         }
 
-        let response = await fetch("/charge", {
+        let response = await fetch("/shipping-details", {
             method: "POST",
             headers: {},
             body: JSON.stringify(body)
         });
 
-        if (response.ok) this.setState({complete: "true"});
-        else this.setState({complete: "false"});
+        if (response.ok) this.setState({
+            shipping_submitted: true,
+            key: response.body
+            });
+        else this.setState({shipping_submitted: false});
     }
   
     render() {
         const {name, email, address, city, state, zip} = this.state
 
-        if (this.state.complete === "true") return (
+        if (this.state.shipping_submitted === true) return (
             <div className="small-container">
-                <div className="vertical-center">
-                <h1>Purchase Complete</h1>
-                </div>
-                <div className="small-container vertical-center">
-                <p>We'll ship your calendar in the next two weeks.</p>
-                </div>
+                <p>Test</p>
             </div>
-        );
-        else if (this.state.complete ==="false") return (
-            <div className="small-container">
-            <div className="vertical-center">
-                <h1>Payment failed</h1>
-            </div>
-            <div className="small-container vertical-center">
-                <p>Refresh to try again.
-                    Please fill out all of the shipping details form.
-                    Your card has not been charged.</p>
-            </div>
-            </div>
-        );
+        )
 
         return (
             <div className="small-container">
@@ -122,26 +96,14 @@ class CheckoutForm extends Component {
                         value={zip}
                         onChange={this.handleChange}/>
                 </form>
-                <p>Enter card details below.
-                    Card payments are processed by Stripe, and we don't see or store your card details.
-                    We'll ship the calendar within two weeks of order.
-                    Shipping and tax are included in the price.</p>
-                <div className="checkout small-container">
-                    {this.state.apiKey && (
-                        <StripeProvider apiKey={this.state.apiKey}>
-                            <Elements>
-                                <CheckoutForm />
-                            </Elements>
-                        </StripeProvider>
-                    )}
-{/*                     <CardElement />
-                    <div className="vertical-center padding-top padding-bottom">
-                        <button onClick={this.submit}>Purchase: $40.00 USD</button>
-                    </div> */}
+                <div className="vertical-center padding-top padding-bottom">
+                    <button onClick={this.submit}>Proceed to Payment</button>
                 </div>
+    
+
             </div>
         );
     }
   }
   
-  export default injectStripe(CheckoutForm);
+  export default (CheckoutForm);
