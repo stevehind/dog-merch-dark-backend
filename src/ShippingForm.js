@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import PaymentForm from './PaymentForm';
-
+import Checkout from './checkout';
 class ShippingForm extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {payment: false};
+        this.state = {
+            shipping_submitted: null,
+            key: null,
+        };
         this.submit = this.submit.bind(this);
       }
     
@@ -23,15 +25,40 @@ class ShippingForm extends Component {
       }, new FormData());
 
       async submit(ev) {
-        this.setState({payment: true});
-        
+        let body = {
+            name : this.state.name,
+            email: this.state.email,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            zip: this.state.zip
+        }
+
+        let response = await fetch("/shipping-details", {
+            method: "POST",
+            headers: {},
+            body: JSON.stringify(body)
+        });
+
+        let response_json = response.json();
+        let response_string = response_json.body
+
+        if (response.ok) this.setState({
+            shipping_submitted: true,
+            key: JSON.stringify(response_string)
+            });
+        else this.setState({shipping_submitted: false});
     }
 
       render() {
         const {name, email, address, city, state, zip} = this.state
 
-        if (this.state.payment === true) return (
-            <PaymentForm/>
+        if (this.state.shipping_submitted === true) return (
+            <Checkout />
+        );
+
+        else if (this.state.shipping_submitted === false) return (
+            <p><em>Something has gone wrong. Please refresh and try again.</em></p>    
         );
 
         return (
