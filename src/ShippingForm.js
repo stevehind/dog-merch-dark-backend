@@ -39,13 +39,14 @@ class ShippingForm extends Component {
             headers: {},
             body: JSON.stringify(body)
         });
-
+        
         let response_json = response.json();
-        let response_string = response_json.body
+        let key = response_json.then(
+            result => this.setState({key: result})
+            ).catch(err => console.log(err))
 
         if (response.ok) this.setState({
-            shipping_submitted: true,
-            key: JSON.stringify(response_string)
+            shipping_submitted: true
             });
         else this.setState({shipping_submitted: false});
     }

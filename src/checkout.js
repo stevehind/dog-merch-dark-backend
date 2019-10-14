@@ -23,7 +23,6 @@ class Checkout extends Component {
   render() {
     return (
       <div className="full-container vertical-center">
-          <p>Test text!</p>
           <div className="checkout">
             {this.state.apiKey && (
             <StripeProvider apiKey={this.state.apiKey}>
