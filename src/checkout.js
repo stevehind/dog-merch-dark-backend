@@ -22,17 +22,15 @@ class Checkout extends Component {
 
   render() {
     return (
-      <div className="full-container vertical-center">
-          <div className="checkout">
-            {this.state.apiKey && (
-            <StripeProvider apiKey={this.state.apiKey}>
-                <Elements>
-                    <CheckoutForm />
-                </Elements>
-            </StripeProvider>
-            )}
+      <div className="checkout">
+        {this.state.apiKey && (
+          <StripeProvider apiKey={this.state.apiKey}>
+            <Elements>
+              <CheckoutForm />
+            </Elements>
+          </StripeProvider>
+        )}
       </div>
-      </div>  
     );
   }
 }

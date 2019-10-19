@@ -109,18 +109,8 @@ class CheckoutForm extends Component {
             minimumFractionDigits: 2
           })}{" "}
         </h1>
-        <h4>Pre-order the Pasha package</h4>
 
         <div className="sr-combo-inputs">
-          <div className="sr-combo-inputs-row">
-            <input
-              type="text"
-              id="name"
-              placeholder="Name"
-              autoComplete="cardholder"
-              className="sr-input"
-            />
-          </div>
 
           <div className="sr-combo-inputs-row">
             <CardElement className="sr-input sr-card-element" style={style} />
