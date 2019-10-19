@@ -15,7 +15,8 @@ class CheckoutForm extends Component {
       metadata: null,
       disabled: false,
       succeeded: false,
-      processing: false
+      processing: false,
+      key: this.props.dataFromParent
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -64,7 +65,6 @@ class CheckoutForm extends Component {
                 error: "",
                 metadata: payload.paymentIntent
               });
-              console.log("[PaymentIntent]", payload.paymentIntent);
             }
           });
       })
@@ -74,13 +74,19 @@ class CheckoutForm extends Component {
   }
 
   renderSuccess() {
+
+    let body = this.state.key
+
+    let payment_update = fetch("/payment_update", {
+      method: "POST",
+      headers: {},
+      body: JSON.stringify(body)
+    });
+
     return (
-      <div className="sr-field-success message">
-        <h1>Your test payment succeeded</h1>
-        <p>View PaymentIntent response:</p>
-        <pre className="sr-callout">
-          <code>{JSON.stringify(this.state.metadata, null, 2)}</code>
-        </pre>
+      <div className="smaller-container sr-field-success message">
+        <h1>Thank you!</h1>
+        <p>Your calendar will ship within two weeks.</p>
       </div>
     );
   }
@@ -103,17 +109,10 @@ class CheckoutForm extends Component {
     };
     return (
       <form onSubmit={this.handleSubmit}>
-        <h1>
-          {this.state.currency.toLocaleUpperCase()}{" "}
-          {this.state.amount.toLocaleString(navigator.language, {
-            minimumFractionDigits: 2
-          })}{" "}
-        </h1>
-
         <div className="sr-combo-inputs">
 
           <div className="sr-combo-inputs-row">
-            <CardElement className="sr-input sr-card-element" style={style} />
+            <CardElement className="left-right-padding sr-input sr-card-element" style={style} />
           </div>
         </div>
 
@@ -122,9 +121,11 @@ class CheckoutForm extends Component {
         )}
 
         {!this.state.succeeded && (
-          <button className="btn" disabled={this.state.disabled}>
-            {this.state.processing ? "Processing…" : "Pay"}
+          <div className="vertical-center padding-top padding-bottom">
+            <button className="btn" disabled={this.state.disabled}>
+            {this.state.processing ? "Processing…" : "Pay USD $40.00"}
           </button>
+          </div>
         )}
       </form>
     );
@@ -132,7 +133,7 @@ class CheckoutForm extends Component {
 
   render() {
     return (
-      <div className="checkout-form">
+      <div className="small-container checkout-form">
         <div className="sr-payment-form">
           <div className="sr-form-row" />
           {this.state.succeeded && this.renderSuccess()}

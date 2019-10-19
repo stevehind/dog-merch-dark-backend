@@ -8,7 +8,8 @@ class Checkout extends Component {
     super(props);
 
     this.state = {
-      apiKey: null
+      apiKey: null,
+      key: this.props.dataFromParent
     };
   }
 
@@ -22,11 +23,11 @@ class Checkout extends Component {
 
   render() {
     return (
-      <div className="checkout">
+      <div className="full-container checkout">
         {this.state.apiKey && (
-          <StripeProvider apiKey={this.state.apiKey}>
-            <Elements>
-              <CheckoutForm />
+          <StripeProvider apiKey={this.state.apiKey} dataFromParent = {this.props.dataFromParent}>
+            <Elements dataFromParent = {this.props.dataFromParent}>
+              <CheckoutForm dataFromParent = {this.props.dataFromParent} />
             </Elements>
           </StripeProvider>
         )}

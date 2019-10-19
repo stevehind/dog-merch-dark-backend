@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Checkout from './checkout';
+
 class ShippingForm extends Component {
 
     constructor(props) {
@@ -43,7 +44,7 @@ class ShippingForm extends Component {
         let response_json = response.json();
         let key = response_json.then(
             result => this.setState({key: result})
-            ).catch(err => console.log(err))
+            ).catch(err => console.log(err))    
 
         if (response.ok) this.setState({
             shipping_submitted: true
@@ -55,7 +56,9 @@ class ShippingForm extends Component {
         const {name, email, address, city, state, zip} = this.state
 
         if (this.state.shipping_submitted === true) return (
-            <Checkout />
+            <div>
+                <Checkout dataFromParent = {this.state.key} />
+            </div>
         );
 
         else if (this.state.shipping_submitted === false) return (
