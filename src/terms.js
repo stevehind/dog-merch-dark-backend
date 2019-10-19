@@ -20,7 +20,7 @@ class Terms extends Component {
     render() {
 
         if (this.state.clicked) return (
-            <body className="alternate-background">
+            <div className="alternate-background">
                 <div className="vertical-center">
                     <button onClick={this.handleHide} className="muted-button">Hide</button>
                 </div>
@@ -61,7 +61,7 @@ class Terms extends Component {
             <div className="vertical-center">
                 <button onClick={this.handleHide} className="muted-button">Hide</button>
             </div>
-            </body>
+            </div>
         )
 
 
