@@ -16,7 +16,7 @@ class CheckoutForm extends Component {
       disabled: false,
       succeeded: false,
       processing: false,
-      key: this.props.dataFromParent
+      key: this.props.dataFromParent,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +27,7 @@ class CheckoutForm extends Component {
     api.getProductDetails().then(productDetails => {
       this.setState({
         amount: productDetails.amount / 100,
-        currency: productDetails.currency
+        currency: productDetails.currency,
       });
     });
   }
@@ -38,7 +38,7 @@ class CheckoutForm extends Component {
     // Step 1: Create PaymentIntent over Stripe API
     api
       .createPaymentIntent({
-        payment_method_types: ["card"]
+        description: this.state.key
       })
       .then(clientSecret => {
         this.setState({
@@ -76,12 +76,6 @@ class CheckoutForm extends Component {
   renderSuccess() {
 
     let body = this.state.key
-
-    let payment_update = fetch("/payment_update", {
-      method: "POST",
-      headers: {},
-      body: JSON.stringify(body)
-    });
 
     return (
       <div className="smaller-container sr-field-success message">
